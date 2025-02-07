@@ -245,7 +245,12 @@ public class ScimClient {
                 var mapping = adapter.getMapping();
                 if (mapping == null) {
                     LOGGER.info("Creating it");
+                    try {
                     this.create(aClass, resource);
+                    }
+                    catch(Exception e) {
+                        LOGGER.error(e);
+                    }
                 } else {
                     LOGGER.info("Replacing it");
                     this.replace(aClass, resource);
@@ -317,6 +322,8 @@ public class ScimClient {
             }
         } catch (ResponseException e) {
             throw new RuntimeException(e);
+        } catch (Exception e) {
+            LOGGER.error(e);
         }
     }
 
