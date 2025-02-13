@@ -58,10 +58,8 @@ public class ScimClient {
                     BasicAuthentication(model.get("auth-user"),
                                         model.get("auth-pass")));
                 break;
-            case "NONE":  // add header "x-access-token" if auth-pass not empty
-                if (model.get("auth-pass") != null && !model.get("auth-pass").isEmpty()) {
-                    defaultHeaders.put("x-access-token", model.get("auth-pass"));
-                }
+            case "X-Access-Token":  // add header "x-access-token"
+                defaultHeaders.put("x-access-token", model.get("auth-pass"));
                 break;
         }
 
